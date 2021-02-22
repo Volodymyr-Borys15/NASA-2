@@ -1,0 +1,16 @@
+/* You can add global styles to this file, and also import other style files */
+html,
+body,
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  overflow-x: hidden;
+  background: url('https://static.independent.co.uk/s3fs-public/thumbnails/image/2018/01/30/08/flat-earth-stock.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}

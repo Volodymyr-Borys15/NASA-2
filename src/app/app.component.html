@@ -1,0 +1,120 @@
+<div class="container">
+  <header>
+    <div style="width: 70px;height: 70px;">
+      <img src="../assets/1200px-NASA_logo.svg.png" alt="">
+    </div>
+    <ul>
+      <li>Generate API Key</li>
+      <li>Authentication</li>
+      <li>Recover API Key</li>
+      <li>Browse API</li>
+    </ul>
+  </header>
+
+  <main class="main">
+    <section class="photos-section">
+      <div class="start-page">
+        <div class="video-block">
+          <iframe frameborder='0' width="100%" height="100%" controls
+            src="https://www.youtube.com/embed/M4tdMR5HLtg?autoplay=0&rel=0" allow='autoplay'>
+          </iframe>
+        </div>
+        <div class="text-block">
+          <h1>{{startingPageInfo.title}}.</h1>
+          <p>{{startingPageInfo.explanation}}.</p>
+        </div>
+      </div>
+      <p style="text-align: center;padding: 10px;font-size: 2.8em;">Universe Travel</p>
+      <div class="img-block">
+        <div style='width:100%'>
+          <img src="http://www.nasa.gov/sites/default/files/thumbnails/image/astronauts_lunar_craterv2.png" alt="">
+        </div>
+        <div style='width:100%'>
+          <img src="https://content.fortune.com/wp-content/uploads/2020/03/NASA-Hiring-Astronauts-2020.jpg" alt="">
+        </div>
+        <div style='width:100%'>
+          <img src="https://gulfbusiness.com/wp-content/uploads/2017/12/UAE-astronaut-programme-e1512563971802.jpg"
+            alt="">
+        </div>
+        <div style='width:100%'>
+          <img src="https://www.arabianbusiness.com/public/images/2017/09/28/astronaut.jpg" alt="">
+        </div>
+      </div>
+    </section>
+
+    <section class="form-section">
+      <h3>Select options and get some photos.</h3>
+      <div class="form-wrapper">
+        <form [formGroup]=userOptions (ngSubmit)='makeRequest()'>
+          <select (change)="changeRover($event)" formControlName="roverName">
+            <option value="" disabled>Choose your Rover</option>
+            <option *ngFor="let r of rovers" [value]="r">{{r}}</option>
+          </select>
+          <div *ngIf="roverName.invalid && !roverName.pristine">
+            <div *ngIf="roverName.errors.required">
+              * This field is required.
+            </div>
+          </div>
+          <select (change)="changeCamera($event)" formControlName="cameraName">
+            <option value="" disabled>Choose your Camera</option>
+            <option *ngFor="let c of cameras" [value]="c">{{c}}</option>
+          </select>
+          <div *ngIf="cameraName.invalid && !cameraName.pristine">
+            <div *ngIf="cameraName.errors.required">
+              * This field is required.
+            </div>
+          </div>
+          <input type="number" name="" id="" formControlName='solNumber' placeholder="Enter day on Mars">
+          <div *ngIf="solNumber.invalid && !solNumber.pristine">
+            <div *ngIf="solNumber.errors.max">
+              * Max number is 1000.
+            </div>
+          </div>
+          <p style="text-align: center;margin: 10px auto;">Click "Get Photos" and you will see photos from MARS!</p>
+          <button type="submit">Get Photos</button>
+        </form>
+        <div class="form-image">
+          <img src="https://mars.nasa.gov/system/news_items/main_images/8748_blog-msl-2020-09-02.jpg" alt="">
+        </div>
+      </div>
+    </section>
+    <!-- Photo area -->
+    <ng-container *ngIf="(arrPhotos|async)?.length;else startingPage">
+      <div class="photos-box">
+        <div *ngFor="let p of arrPhotos|async">
+          <div class="img-card">
+            <app-picture [picture]='p'></app-picture>
+          </div>
+        </div>
+      </div>
+      <button *ngIf="(arrPhotos|async)?.length" class="load-more" (click)="loadMore()">Load more</button>
+    </ng-container>
+    <ng-template #startingPage>
+
+    </ng-template>
+    <section class="random-text" style="padding: 10px;">
+      <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Laborum alias harum nisi animi beatae recusandae
+        molestiae voluptatum voluptates at ipsam itaque doloremque quasi temporibus delectus voluptatem culpa expedita
+        omnis quis a praesentium distinctio quo blanditiis, accusantium fugiat! Esse, beatae reiciendis non, sequi,
+        atque repellat est libero optio quibusdam pariatur ex ratione. Ad recusandae dolor quo nesciunt facere accusamus
+        possimus, sequi dolores sit quisquam commodi eius corporis nulla qui fugiat et accusantium, ipsam consequatur!
+        Eveniet beatae quos aliquid cupiditate inventore! Neque, similique. Dolorem nesciunt iste error vitae libero
+        sint earum, quaerat molestias. Fugit ratione eligendi quam autem sed illum eaque impedit.</p>
+    </section>
+    <section style="width: 100%;margin: 10px auto;padding: 10px;">
+      <img src="https://solarsystem.nasa.gov/internal_resources/3453" alt="">
+    </section>
+
+  </main>
+  <footer>
+    <div style="width: 70px;height: 70px;">
+      <img src="../assets/1200px-NASA_logo.svg.png" alt="">
+    </div>
+    <ul>
+      <li>Privacy</li>
+      <li>FOIA</li>
+      <li>Nasa</li>
+      <li>nasa-data@lists.arc.nasa.gov</li>
+    </ul>
+  </footer>
+</div>
